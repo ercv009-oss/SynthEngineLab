@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Entrepreneur Business Plan – Interactive Charts</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 1rem;
+    line-height: 1.5;
+  }
+
+  h1, h2 {
+    margin-top: 1.5rem;
+  }
+
+  .chart-area {
+    max-width: 500px;
+    margin: 1.5rem 0;
+  }
+
+  /* Toggle buttons */
+  .chart-toggle {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .chart-toggle label {
+    cursor: pointer;
+    padding: 0.4rem 0.7rem;
+    border: 1px solid #333;
+    border-radius: 5px;
+  }
+
+  input[type="radio"] {
+    display: none;
+  }
+
+  /* Chart container */
+  .bar-chart {
+    display: none;
+  }
+
+  input#rev:checked ~ .charts #revenueChart,
+  input#cost:checked ~ .charts #costChart,
+  input#profit:checked ~ .charts #profitChart {
+    display: block;
+  }
+
+  .bar {
+    background: #4A90E2;
+    height: 28px;
+    margin: 8px 0;
+    color: white;
+    display: flex;
+    align-items: center;
+    padding-left: 8px;
+    border-radius: 4px;
+  }
+</style>
+</head>
+<body>
+
+<h1>Business Plan: Interactive Metrics for Entrepreneurs</h1>
+
+<p>This page presents a concise business plan and simple CSS‑only interactive charts that let founders review revenue, cost, and profit assumptions.</p>
+
+<h2>1. Problem</h2>
+<p>Entrepreneurs lack quick, visual, low‑tech tools to communicate assumptions and financial projections when pitching or planning.</p>
+
+<h2>2. Solution</h2>
+<p>A lightweight, browser‑native financial snapshot using pure HTML/CSS charts that work even without JavaScript.</p>
+
+<h2>3. Market</h2>
+<p>Solo founders, early‑stage startups, accelerators, and small business owners needing fast, visual planning assets.</p>
+
+<h2>4. Interactive Charts</h2>
+
+<div class="chart-area">
+
+  <!-- Toggle Buttons -->
+  <div class="chart-toggle">
+    <label for="rev">Revenue</label>
+    <label for="cost">Costs</label>
+    <label for="profit">Profit</label>
+  </div>
+
+  <input type="radio" name="chart" id="rev" checked>
+  <input type="radio" name="chart" id="cost">
+  <input type="radio" name="chart" id="profit">
+
+  <!-- Charts -->
+  <div class="charts">
+    <div id="revenueChart" class="bar-chart">
+      <div class="bar" style="width: 80%;">Q1 Revenue</div>
+      <div class="bar" style="width: 90%;">Q2 Revenue</div>
+      <div class="bar" style="width: 95%;">Q3 Revenue</div>
+      <div class="bar" style="width: 100%;">Q4 Revenue</div>
+    </div>
+
+    <div id="costChart" class="bar-chart">
+      <div class="bar" style="width: 60%; background:#D0021B;">Q1 Costs</div>
+      <div class="bar" style="width: 55%; background:#D0021B;">Q2 Costs</div>
+      <div class="bar" style="width: 50%; background:#D0021B;">Q3 Costs</div>
+      <div class="bar" style="width: 45%; background:#D0021B;">Q4 Costs</div>
+    </div>
+
+    <div id="profitChart" class="bar-chart">
+      <div class="bar" style="width: 40%; background:#7ED321;">Q1 Profit</div>
+      <div class="bar" style="width: 50%; background:#7ED321;">Q2 Profit</div>
+      <div class="bar" style="width: 60%; background:#7ED321;">Q3 Profit</div>
+      <div class="bar" style="width: 70%; background:#7ED321;">Q4 Profit</div>
+    </div>
+  </div>
+</div>
+
+<h2>5. Business Model</h2>
+<ul>
+  <li>One‑time template sales</li>
+  <li>Subscription for advanced versions</li>
+  <li>Branding/white‑label for accelerators</li>
+</ul>
+
+<h2>6. Go‑to‑Market</h2>
+<ul>
+  <li>Founder communities</li>
+  <li>Small business forums</li>
+  <li>Pitch‑deck marketplaces</li>
+</ul>
+
+</body>
+</html>
