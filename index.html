@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Background Remover</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00d9ff;
+            --primary-dark: #00a8cc;
+            --secondary: #6b46c1;
+            --bg-light: #f8f9fa;
+            --bg-card-light: #ffffff;
+            --text-light: #1a202c;
+            --text-muted-light: #718096;
+            --border-light: #e2e8f0;
+            --shadow-light: rgba(0, 0, 0, 0.1);
+        }
+
+        .dark {
+            --bg-light: #0f0f1e;
+            --bg-card-light: #1a1a2e;
+            --text-light: #f7fafc;
+            --text-muted-light: #a0aec0;
+            --border-light: #2d3748;
+            --shadow-light: rgba(0, 217, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-light);
+            color: var(--text-light);
+            min-height: 100vh;
+            padding: 1rem;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: fadeInDown 0.6s ease;
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            color: var(--text-muted-light);
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            font-weight: 300;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            animation: fadeInUp 0.6s ease 0.2s both;
+        }
+
+        @media (min-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .card {
+            background: var(--bg-card-light);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            box-shadow: 0 10px 40px var(--shadow-light);
+            border: 1px solid var(--border-light);
+            transition: all 0.3s ease;
+        }
+
+        .card h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-light);
+        }
+
+        .upload-area {
+            border: 3px dashed var(--border-light);
+            border-radius: 1rem;
+            padding: 3rem 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .upload-area::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .upload-area:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .upload-area:hover::before {
+            opacity: 0.05;
+        }
+
+        .upload-area.dragover {
+            border-color: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background-clip: padding-box;
+            opacity: 0.9;
+        }
+
+        .upload-area.dragover::before {
+            opacity: 0.1;
+        }
+
+        .upload-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .upload-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.6;
+        }
+
+        .upload-text {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .upload-hint {
+            color: var(--text-muted-light);
+            font-size: 0.9rem;
+        }
+
+        #fileInput {
+            display: none;
+        }
+
+        .preview-container {
+            position: relative;
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 1rem;
+            overflow: hidden;
+            background-image:
+                linear-gradient(45deg, #e5e5f7 25%, transparent 25%),
+                linear-gradient(-45deg, #e5e5f7 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, #e5e5f7 75%),
+                linear-gradient(-45deg, transparent 75%, #e5e5f7 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+            background-color: #ffffff;
+        }
+
+        .dark .preview-container {
+            background-image:
+                linear-gradient(45deg, #2d3748 25%, transparent 25%),
+                linear-gradient(-45deg, #2d3748 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, #2d3748 75%),
+                linear-gradient(-45deg, transparent 75%, #2d3748 75%);
+            background-color: #1a202c;
+        }
+
+        .preview-image {
+            max-width: 100%;
+            max-height: 500px;
+            object-fit: contain;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .empty-state {
+            text-align: center;
+            color: var(--text-muted-light);
+            padding: 3rem 1rem;
+        }
+
+        .empty-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.3;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 3rem 1rem;
+        }
+
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid var(--border-light);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        .loading-text {
+            color: var(--text-muted-light);
+            font-size: 1rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.875rem 2rem;
+            border: none;
+            border-radius: 0.75rem;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: #ffffff;
+            box-shadow: 0 4px 15px rgba(0, 217, 255, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 217, 255, 0.4);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        .actions {
+            margin-top: 1.5rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .error {
+            background: #fee;
+            border: 1px solid #fcc;
+            color: #c33;
+            padding: 1rem;
+            border-radius: 0.75rem;
+            margin-top: 1rem;
+            animation: shake 0.5s ease;
+        }
+
+        .dark .error {
+            background: #4a1a1a;
+            border-color: #7a2a2a;
+            color: #ff6b6b;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        .comparison-slider {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .comparison-slider img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .comparison-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 2;
+        }
+
+        .slider-handle {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 4px;
+            height: 100%;
+            background: var(--primary);
+            cursor: ew-resize;
+            z-index: 3;
+            transform: translateX(-50%);
+        }
+
+        .slider-handle::before {
+            content: '⇄';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--primary);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>BG REMOVER</h1>
+            <p class="subtitle">Remove backgrounds from your images instantly with AI</p>
+        </header>
+
+        <div class="main-content">
+            <div class="card">
+                <h2>Upload Image</h2>
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-content">
+                        <div class="upload-icon">📸</div>
+                        <div class="upload-text">Click or drag image here</div>
+                        <div class="upload-hint">PNG, JPG, WEBP up to 10MB</div>
+                    </div>
+                </div>
+                <input type="file" id="fileInput" accept="image/*">
+
+                <div id="originalPreview" style="display: none; margin-top: 1.5rem;">
+                    <h3 style="margin-bottom: 1rem; font-size: 1.1rem;">Original Image</h3>
+                    <div class="preview-container">
+                        <img id="originalImage" class="preview-image" alt="Original">
+                    </div>
+                    <div class="actions">
+                        <button class="btn btn-primary" id="processBtn">Remove Background</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Result</h2>
+                <div class="preview-container" id="resultContainer">
+                    <div class="empty-state">
+                        <div class="empty-icon">✨</div>
+                        <p>Your processed image will appear here</p>
+                    </div>
+                </div>
+                <div class="actions" id="resultActions" style="display: none;">
+                    <a class="btn btn-primary" id="downloadBtn" download="background-removed.png">Download Image</a>
+                </div>
+                <div id="errorContainer"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Dark mode detection
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark');
+        }
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+            if (event.matches) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        });
+
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+        const originalPreview = document.getElementById('originalPreview');
+        const originalImage = document.getElementById('originalImage');
+        const processBtn = document.getElementById('processBtn');
+        const resultContainer = document.getElementById('resultContainer');
+        const resultActions = document.getElementById('resultActions');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const errorContainer = document.getElementById('errorContainer');
+
+        let currentFile = null;
+
+        // Upload area click
+        uploadArea.addEventListener('click', () => fileInput.click());
+
+        // File input change
+        fileInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) handleFile(file);
+        });
+
+        // Drag and drop
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+        });
+
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('dragover');
+        });
+
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            const file = e.dataTransfer.files[0];
+            if (file && file.type.startsWith('image/')) {
+                handleFile(file);
+            }
+        });
+
+        function handleFile(file) {
+            currentFile = file;
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                originalImage.src = e.target.result;
+                originalPreview.style.display = 'block';
+                errorContainer.innerHTML = '';
+                resultContainer.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-icon">✨</div>
+                        <p>Your processed image will appear here</p>
+                    </div>
+                `;
+                resultActions.style.display = 'none';
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // Register handler for background removal
+        window.Poe.registerHandler('bg-removal-handler', (result, context) => {
+            const msg = result.responses[0];
+
+            if (msg.status === 'error') {
+                resultContainer.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-icon">❌</div>
+                        <p>Processing failed</p>
+                    </div>
+                `;
+                errorContainer.innerHTML = `
+                    <div class="error">Error: ${msg.statusText || 'Failed to remove background'}</div>
+                `;
+            } else if (msg.status === 'incomplete') {
+                // Keep showing loading state
+            } else if (msg.status === 'complete') {
+                if (msg.attachments && msg.attachments.length > 0) {
+                    const imageUrl = msg.attachments[0].url;
+                    resultContainer.innerHTML = `
+                        <img src="${imageUrl}" class="preview-image" alt="Background removed">
+                    `;
+                    downloadBtn.href = imageUrl;
+                    resultActions.style.display = 'flex';
+                } else {
+                    resultContainer.innerHTML = `
+                        <div class="empty-state">
+                            <div class="empty-icon">❌</div>
+                            <p>No image was generated</p>
+                        </div>
+                    `;
+                    errorContainer.innerHTML = `
+                        <div class="error">No processed image was returned</div>
+                    `;
+                }
+            }
+        });
+
+        // Process button click
+        processBtn.addEventListener('click', async () => {
+            if (!currentFile) return;
+
+            errorContainer.innerHTML = '';
+            resultContainer.innerHTML = `
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <div class="loading-text">Removing background...</div>
+                </div>
+            `;
+            resultActions.style.display = 'none';
+
+            try {
+                await window.Poe.sendUserMessage('@remove-background', {
+                    attachments: [currentFile],
+                    handler: 'bg-removal-handler',
+                    stream: false,
+                    openChat: false
+                });
+            } catch (err) {
+                resultContainer.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-icon">❌</div>
+                        <p>Failed to process</p>
+                    </div>
+                `;
+                errorContainer.innerHTML = `
+                    <div class="error">Error: ${err.message || 'Failed to process image'}</div>
+                `;
+            }
+        });
+    </script>
+</body>
+</html>
