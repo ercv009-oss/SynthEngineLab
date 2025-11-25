@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Animated Flowers by the River</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      height: 100vh;
+      background: linear-gradient(to top, #87ceeb 0%, #cceeff 100%);
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      font-family: sans-serif;
+    }
+
+    .scene {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    /* River area */
+    .river {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 180px;
+      background: #46a9e0;
+      overflow: hidden;
+    }
+
+    /* Flowing water animation */
+    .wave {
+      position: absolute;
+      bottom: 0;
+      width: 200%;
+      height: 60px;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 100%;
+      animation: waveMove 6s linear infinite;
+    }
+
+    .wave:nth-child(2) {
+      bottom: 10px;
+      animation-duration: 10s;
+      opacity: 0.4;
+    }
+
+    @keyframes waveMove {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* Meadow */
+    .meadow {
+      position: absolute;
+      bottom: 180px;
+      width: 100%;
+      height: 100px;
+      background: linear-gradient(to top, #55aa55, #77cc77);
+    }
+
+    /* Flowers */
+    .flower {
+      position: absolute;
+      bottom: 180px;
+      width: 10px;
+      height: 60px;
+      transform-origin: bottom center;
+      animation: sway 3s ease-in-out infinite;
+    }
+
+    @keyframes sway {
+      0%, 100% { transform: rotate(0deg); }
+      50% { transform: rotate(4deg); }
+    }
+
+    .stem {
+      width: 4px;
+      height: 40px;
+      background: #2b7a2b;
+      margin: 0 auto;
+    }
+
+    .petal {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 20px;
+      height: 20px;
+      background: pink;
+      border-radius: 50%;
+      animation: blossom 3s ease-in-out infinite alternate;
+    }
+
+    .petal:nth-child(2) {
+      transform: translate(-50%, -10px);
+      background: #ffafd7;
+      animation-delay: 1.5s;
+    }
+
+    .petal:nth-child(3) {
+      transform: translate(-60%, -5px);
+      background: #ff80c0;
+      animation-delay: 0.8s;
+    }
+
+    @keyframes blossom {
+      from { transform: scale(0.9) translateX(-50%) rotate(0deg); }
+      to { transform: scale(1.1) translateX(-50%) rotate(5deg); }
+    }
+
+    @media (max-width: 600px) {
+      .flower {
+        transform: scale(0.8);
+      }
+      .meadow {
+        height: 80px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="scene">
+    <div class="meadow"></div>
+
+    <!-- Multiple flowers -->
+    <div class="flower" style="left: 10%;">
+      <div class="stem"></div>
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="petal"></div>
+    </div>
+    <div class="flower" style="left: 25%;">
+      <div class="stem"></div>
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="petal"></div>
+    </div>
+    <div class="flower" style="left: 40%;">
+      <div class="stem"></div>
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="petal"></div>
+    </div>
+    <div class="flower" style="left: 55%;">
+      <div class="stem"></div>
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="petal"></div>
+    </div>
+    <div class="flower" style="left: 70%;">
+      <div class="stem"></div>
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="petal"></div>
+    </div>
+    <div class="flower" style="left: 85%;">
+      <div class="stem"></div>
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="petal"></div>
+    </div>
+
+    <!-- River with waves -->
+    <div class="river">
+      <div class="wave"></div>
+      <div class="wave"></div>
+    </div>
+  </div>
+</body>
+</html>
