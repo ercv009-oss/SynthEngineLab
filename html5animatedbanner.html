@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML5 Animated Banner Templates</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Raleway:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #FF6B35;
+            --secondary: #004E89;
+            --accent: #F7B801;
+            --dark: #1A1A2E;
+            --light: #FFFFFF;
+        }
+
+        .dark {
+            --primary: #FF8C61;
+            --secondary: #2A7AB0;
+            --accent: #FFD34E;
+            --dark: #0F0F1E;
+            --light: #E8E8E8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Raleway', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 3rem 2rem;
+            min-height: 100vh;
+            transition: background 0.3s ease;
+        }
+
+        .dark body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+
+        .banners-grid {
+            display: grid;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .banner-wrapper {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        .banner-title {
+            color: white;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .banner-info {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .banner-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Banner Base Styles */
+        .banner {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+        }
+
+        /* Leaderboard Banner - 728x90 */
+        .banner-leaderboard {
+            width: 728px;
+            height: 90px;
+            max-width: 100%;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+
+        /* Medium Rectangle - 300x250 */
+        .banner-medium-rectangle {
+            width: 300px;
+            height: 250px;
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+        }
+
+        /* Wide Skyscraper - 160x600 */
+        .banner-wide-skyscraper {
+            width: 160px;
+            height: 600px;
+            background: linear-gradient(180deg, var(--accent) 0%, var(--primary) 100%);
+        }
+
+        /* Large Rectangle - 336x280 */
+        .banner-large-rectangle {
+            width: 336px;
+            height: 280px;
+            background: linear-gradient(135deg, #00d2ff 0%, #3a47d5 100%);
+        }
+
+        /* Mobile Banner - 320x50 */
+        .banner-mobile {
+            width: 320px;
+            height: 50px;
+            max-width: 100%;
+            background: linear-gradient(90deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        /* Half Page - 300x600 */
+        .banner-half-page {
+            width: 300px;
+            height: 600px;
+            background: linear-gradient(180deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        /* Banner Elements */
+        .banner-bg-shape {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+
+        .shape-1 {
+            width: 200px;
+            height: 200px;
+            top: -50px;
+            right: -50px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .shape-2 {
+            width: 150px;
+            height: 150px;
+            bottom: -40px;
+            left: -40px;
+            animation: float 8s ease-in-out infinite reverse;
+        }
+
+        .shape-3 {
+            width: 100px;
+            height: 100px;
+            top: 50%;
+            left: 50%;
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        .banner-content {
+            position: relative;
+            z-index: 2;
+            padding: 1.5rem;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .banner-logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            color: white;
+            margin-bottom: 0.5rem;
+            letter-spacing: 2px;
+            animation: slideInLeft 0.8s ease-out;
+        }
+
+        .banner-headline {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            color: white;
+            line-height: 1.1;
+            margin-bottom: 0.5rem;
+            animation: slideInRight 0.8s ease-out 0.2s backwards;
+        }
+
+        .banner-subheadline {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 1rem;
+            font-weight: 600;
+            animation: fadeIn 0.8s ease-out 0.4s backwards;
+        }
+
+        .banner-cta {
+            display: inline-block;
+            background: white;
+            color: var(--secondary);
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            text-align: center;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            animation: bounceIn 0.8s ease-out 0.6s backwards;
+            align-self: flex-start;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .banner-cta:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Leaderboard Specific */
+        .banner-leaderboard .banner-content {
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 2rem;
+        }
+
+        .banner-leaderboard .banner-text {
+            flex: 1;
+        }
+
+        .banner-leaderboard .banner-headline {
+            font-size: 1.75rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .banner-leaderboard .banner-subheadline {
+            font-size: 0.85rem;
+            margin-bottom: 0;
+        }
+
+        .banner-leaderboard .banner-cta {
+            padding: 0.6rem 1.25rem;
+            font-size: 0.85rem;
+            margin-left: 1rem;
+        }
+
+        /* Mobile Specific */
+        .banner-mobile .banner-content {
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.5rem 1rem;
+        }
+
+        .banner-mobile .banner-headline {
+            font-size: 1.1rem;
+            margin-bottom: 0;
+        }
+
+        .banner-mobile .banner-subheadline {
+            display: none;
+        }
+
+        .banner-mobile .banner-cta {
+            padding: 0.4rem 1rem;
+            font-size: 0.75rem;
+            margin-left: 0.5rem;
+        }
+
+        .banner-mobile .banner-logo {
+            font-size: 1rem;
+            margin-bottom: 0;
+        }
+
+        /* Medium Rectangle Specific */
+        .banner-medium-rectangle .banner-headline {
+            font-size: 1.75rem;
+        }
+
+        .banner-medium-rectangle .banner-content {
+            text-align: center;
+            align-items: center;
+        }
+
+        .banner-medium-rectangle .banner-cta {
+            align-self: center;
+        }
+
+        /* Large Rectangle Specific */
+        .banner-large-rectangle .banner-headline {
+            font-size: 2rem;
+        }
+
+        .banner-large-rectangle .banner-content {
+            text-align: center;
+            align-items: center;
+        }
+
+        .banner-large-rectangle .banner-cta {
+            align-self: center;
+        }
+
+        /* Skyscraper Specific */
+        .banner-wide-skyscraper .banner-content {
+            text-align: center;
+            align-items: center;
+            padding: 2rem 1rem;
+        }
+
+        .banner-wide-skyscraper .banner-headline {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .banner-wide-skyscraper .banner-cta {
+            align-self: center;
+            margin-top: auto;
+        }
+
+        /* Half Page Specific */
+        .banner-half-page .banner-content {
+            text-align: center;
+            align-items: center;
+            padding: 2rem 1.5rem;
+        }
+
+        .banner-half-page .banner-headline {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .banner-half-page .banner-cta {
+            align-self: center;
+            margin-top: auto;
+        }
+
+        /* Product Image */
+        .product-image {
+            width: 120px;
+            height: 120px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            animation: rotateIn 1s ease-out 0.3s backwards;
+            margin-bottom: 1rem;
+        }
+
+        .banner-wide-skyscraper .product-image,
+        .banner-half-page .product-image {
+            width: 100px;
+            height: 100px;
+            font-size: 2.5rem;
+        }
+
+        /* Animated Particles */
+        .particle {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            opacity: 0;
+            animation: particleFloat 4s ease-in-out infinite;
+        }
+
+        .particle:nth-child(1) { width: 4px; height: 4px; left: 20%; animation-delay: 0s; }
+        .particle:nth-child(2) { width: 6px; height: 6px; left: 40%; animation-delay: 1s; }
+        .particle:nth-child(3) { width: 3px; height: 3px; left: 60%; animation-delay: 2s; }
+        .particle:nth-child(4) { width: 5px; height: 5px; left: 80%; animation-delay: 0.5s; }
+        .particle:nth-child(5) { width: 4px; height: 4px; left: 10%; animation-delay: 1.5s; }
+
+        /* Discount Badge */
+        .discount-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--accent);
+            color: var(--dark);
+            font-weight: 800;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            animation: popIn 0.6s ease-out 0.8s backwards;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            z-index: 3;
+        }
+
+        .banner-mobile .discount-badge,
+        .banner-leaderboard .discount-badge {
+            top: 0.5rem;
+            right: 0.5rem;
+            padding: 0.3rem 0.75rem;
+            font-size: 0.75rem;
+        }
+
+        .banner-wide-skyscraper .discount-badge {
+            top: 1rem;
+            left: 50%;
+            right: auto;
+            transform: translateX(-50%);
+        }
+
+        /* Controls */
+        .controls {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+        }
+
+        .controls h3 {
+            color: white;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .btn {
+            background: white;
+            color: #667eea;
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            margin: 0.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Animations */
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.3);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            70% {
+                transform: scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes popIn {
+            0% {
+                opacity: 0;
+                transform: scale(0) rotate(-180deg);
+            }
+            80% {
+                transform: scale(1.1) rotate(10deg);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) rotate(0deg);
+            }
+        }
+
+        @keyframes rotateIn {
+            from {
+                opacity: 0;
+                transform: rotate(-180deg) scale(0);
+            }
+            to {
+                opacity: 1;
+                transform: rotate(0) scale(1);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.5;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.2);
+                opacity: 0.8;
+            }
+        }
+
+        @keyframes particleFloat {
+            0% {
+                transform: translateY(100%);
+                opacity: 0;
+            }
+            50% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+        }
+
+        /* Paused State */
+        .paused * {
+            animation-play-state: paused !important;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .banner-leaderboard {
+                width: 100%;
+                height: auto;
+                min-height: 90px;
+            }
+
+            .banner-leaderboard .banner-content {
+                flex-direction: column;
+                text-align: center;
+                padding: 1rem;
+            }
+
+            .banner-leaderboard .banner-cta {
+                margin-left: 0;
+                margin-top: 0.5rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 HTML5 Animated Banner Templates</h1>
+        <p class="subtitle">Professional, customizable banner ads in standard IAB sizes</p>
+
+        <div class="banners-grid">
+            <!-- Leaderboard 728x90 -->
+            <div class="banner-wrapper">
+                <h3 class="banner-title">Leaderboard - 728×90</h3>
+                <p class="banner-info">Standard header banner, ideal for website headers</p>
+                <div class="banner-container">
+                    <div class="banner banner-leaderboard" id="banner1">
+                        <div class="banner-bg-shape shape-1"></div>
+                        <div class="banner-bg-shape shape-2"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="discount-badge">50% OFF</div>
+                        <div class="banner-content">
+                            <div class="banner-text">
+                                <div class="banner-logo">BRAND</div>
+                                <div class="banner-headline">Summer Sale Now Live!</div>
+                                <div class="banner-subheadline">Limited Time Offer - Shop Now</div>
+                            </div>
+                            <a href="#" class="banner-cta" onclick="handleClick(event)">Shop Now →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Medium Rectangle 300x250 -->
+            <div class="banner-wrapper">
+                <h3 class="banner-title">Medium Rectangle - 300×250</h3>
+                <p class="banner-info">Most popular display ad size, high engagement rate</p>
+                <div class="banner-container">
+                    <div class="banner banner-medium-rectangle" id="banner2">
+                        <div class="banner-bg-shape shape-1"></div>
+                        <div class="banner-bg-shape shape-2"></div>
+                        <div class="banner-bg-shape shape-3"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="discount-badge">-30%</div>
+                        <div class="banner-content">
+                            <div class="banner-logo">YOUR BRAND</div>
+                            <div class="product-image">🎁</div>
+                            <div class="banner-headline">Exclusive Deals</div>
+                            <div class="banner-subheadline">Get up to 30% off on all products</div>
+                            <a href="#" class="banner-cta" onclick="handleClick(event)">Discover More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Large Rectangle 336x280 -->
+            <div class="banner-wrapper">
+                <h3 class="banner-title">Large Rectangle - 336×280</h3>
+                <p class="banner-info">Larger format for more visual impact</p>
+                <div class="banner-container">
+                    <div class="banner banner-large-rectangle" id="banner3">
+                        <div class="banner-bg-shape shape-1"></div>
+                        <div class="banner-bg-shape shape-2"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="discount-badge">NEW</div>
+                        <div class="banner-content">
+                            <div class="banner-logo">PREMIUM</div>
+                            <div class="product-image">⭐</div>
+                            <div class="banner-headline">New Collection</div>
+                            <div class="banner-subheadline">Discover our latest arrivals</div>
+                            <a href="#" class="banner-cta" onclick="handleClick(event)">Explore Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile Banner 320x50 -->
+            <div class="banner-wrapper">
+                <h3 class="banner-title">Mobile Banner - 320×50</h3>
+                <p class="banner-info">Optimized for mobile devices</p>
+                <div class="banner-container">
+                    <div class="banner banner-mobile" id="banner4">
+                        <div class="banner-bg-shape shape-1"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="discount-badge">HOT</div>
+                        <div class="banner-content">
+                            <div class="banner-text">
+                                <div class="banner-headline">Flash Sale Today!</div>
+                            </div>
+                            <a href="#" class="banner-cta" onclick="handleClick(event)">Buy</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Wide Skyscraper 160x600 -->
+            <div class="banner-wrapper">
+                <h3 class="banner-title">Wide Skyscraper - 160×600</h3>
+                <p class="banner-info">Vertical banner for sidebar placement</p>
+                <div class="banner-container">
+                    <div class="banner banner-wide-skyscraper" id="banner5">
+                        <div class="banner-bg-shape shape-1"></div>
+                        <div class="banner-bg-shape shape-2"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="discount-badge">SALE</div>
+                        <div class="banner-content">
+                            <div class="banner-logo">BRAND</div>
+                            <div class="product-image">🚀</div>
+                            <div class="banner-headline">Launch Special</div>
+                            <div class="banner-subheadline">Limited time offer on new products</div>
+                            <a href="#" class="banner-cta" onclick="handleClick(event)">Get Started</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Half Page 300x600 -->
+            <div class="banner-wrapper">
+                <h3 class="banner-title">Half Page - 300×600</h3>
+                <p class="banner-info">Large vertical format for maximum visibility</p>
+                <div class="banner-container">
+                    <div class="banner banner-half-page" id="banner6">
+                        <div class="banner-bg-shape shape-1"></div>
+                        <div class="banner-bg-shape shape-2"></div>
+                        <div class="banner-bg-shape shape-3"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="discount-badge">LIMITED</div>
+                        <div class="banner-content">
+                            <div class="banner-logo">EXCLUSIVE</div>
+                            <div class="product-image">💎</div>
+                            <div class="banner-headline">Premium Experience</div>
+                            <div class="banner-subheadline">Unlock exclusive benefits and rewards today</div>
+                            <a href="#" class="banner-cta" onclick="handleClick(event)">Join Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <h3>Animation Controls</h3>
+            <button class="btn" onclick="pauseAllAnimations()">⏸ Pause All</button>
+            <button class="btn" onclick="playAllAnimations()">▶ Play All</button>
+            <button class="btn" onclick="restartAllAnimations()">🔄 Restart All</button>
+        </div>
+    </div>
+
+    <script>
+        // Dark mode detection
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark');
+        }
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+            if (event.matches) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        });
+
+        // Handle CTA clicks
+        function handleClick(event) {
+            event.preventDefault();
+            showNotification('Banner clicked! This would redirect to your landing page.');
+        }
+
+        // Show notification
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.textContent = message;
+            notification.style.cssText = `
+                position: fixed;
+                top: 2rem;
+                left: 50%;
+                transform: translateX(-50%);
+                background: white;
+                color: #667eea;
+                padding: 1rem 2rem;
+                border-radius: 50px;
+                font-weight: 700;
+                box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+                z-index: 10000;
+                animation: slideInDown 0.5s ease-out;
+            `;
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.style.animation = 'slideInLeft 0.5s ease-out reverse';
+                setTimeout(() => notification.remove(), 500);
+            }, 3000);
+        }
+
+        // Animation controls
+        function pauseAllAnimations() {
+            document.querySelectorAll('.banner').forEach(banner => {
+                banner.classList.add('paused');
+            });
+            showNotification('All animations paused');
+        }
+
+        function playAllAnimations() {
+            document.querySelectorAll('.banner').forEach(banner => {
+                banner.classList.remove('paused');
+            });
+            showNotification('All animations playing');
+        }
+
+        function restartAllAnimations() {
+            document.querySelectorAll('.banner').forEach(banner => {
+                banner.classList.remove('paused');
+                // Force reflow to restart animations
+                banner.style.animation = 'none';
+                banner.offsetHeight; // Trigger reflow
+                banner.style.animation = null;
+
+                // Restart child animations
+                const children = banner.querySelectorAll('*');
+                children.forEach(child => {
+                    const animations = window.getComputedStyle(child).animation;
+                    if (animations && animations !== 'none') {
+                        child.style.animation = 'none';
+                        child.offsetHeight;
+                        child.style.animation = null;
+                    }
+                });
+            });
+            showNotification('All animations restarted');
+        }
+
+        // Add hover effect to pause/play individual banners
+        document.querySelectorAll('.banner').forEach(banner => {
+            banner.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.02)';
+                this.style.transition = 'transform 0.3s ease';
+            });
+
+            banner.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1)';
+            });
+        });
+
+        // Add slide-in animation for notification
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideInDown {
+                from {
+                    opacity: 0;
+                    transform: translateX(-50%) translateY(-20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateX(-50%) translateY(0);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
+
