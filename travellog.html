@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Registry - Your Journey Log</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&family=Karla:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #E07856;
+            --primary-dark: #C86344;
+            --secondary: #F4A261;
+            --accent: #2A9D8F;
+            --bg-primary: #FFF9F5;
+            --bg-secondary: #FFFFFF;
+            --text-primary: #2D3142;
+            --text-secondary: #5A5F73;
+            --border: #E8DDD3;
+            --shadow: rgba(224, 120, 86, 0.1);
+        }
+
+        .dark {
+            --primary: #E07856;
+            --primary-dark: #F49172;
+            --secondary: #F4A261;
+            --accent: #3DBFAE;
+            --bg-primary: #1A1D2E;
+            --bg-secondary: #252936;
+            --text-primary: #F0EAE4;
+            --text-secondary: #C4BDB5;
+            --border: #3D4257;
+            --shadow: rgba(0, 0, 0, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Karla', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: background 0.3s ease, color 0.3s ease;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: fadeInDown 0.6s ease-out;
+        }
+
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .stats-bar {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+            animation: fadeIn 0.8s ease-out 0.2s backwards;
+        }
+
+        .stat-card {
+            background: var(--bg-secondary);
+            padding: 1.25rem 2rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px var(--shadow);
+            border: 2px solid var(--border);
+            min-width: 160px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px var(--shadow);
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .form-section {
+            background: var(--bg-secondary);
+            padding: 2rem;
+            border-radius: 20px;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 8px 30px var(--shadow);
+            border: 2px solid var(--border);
+            animation: fadeIn 0.8s ease-out 0.4s backwards;
+        }
+
+        .form-section h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.25rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+        }
+
+        input, textarea {
+            padding: 0.875rem 1rem;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: 'Karla', sans-serif;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(224, 120, 86, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        button {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 12px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(224, 120, 86, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(224, 120, 86, 0.4);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .entries-section h2 {
+            font-family: 'Outfit', sans-family;
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            animation: fadeIn 0.8s ease-out 0.6s backwards;
+        }
+
+        .entries-list {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .entry-card {
+            background: var(--bg-secondary);
+            padding: 1.75rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px var(--shadow);
+            border: 2px solid var(--border);
+            position: relative;
+            transition: all 0.3s ease;
+            animation: slideInUp 0.4s ease-out backwards;
+        }
+
+        .entry-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px var(--shadow);
+        }
+
+        .entry-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .entry-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .entry-meta {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .meta-icon {
+            font-weight: 600;
+        }
+
+        .entry-description {
+            color: var(--text-primary);
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        .entry-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .entry-cost {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .btn-delete {
+            background: transparent;
+            color: var(--text-secondary);
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+            border: 1px solid var(--border);
+        }
+
+        .btn-delete:hover {
+            background: #ef4444;
+            color: white;
+            border-color: #ef4444;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--text-secondary);
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .empty-state-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .empty-state-text {
+            font-size: 1.25rem;
+            font-weight: 500;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                padding: 1.5rem 1rem;
+            }
+
+            .form-section {
+                padding: 1.5rem;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stat-card {
+                min-width: 140px;
+                padding: 1rem 1.5rem;
+            }
+
+            .entry-card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>✈️ Travel Registry</h1>
+            <p class="subtitle">Document your adventures & track your journey</p>
+        </header>
+
+        <div class="stats-bar">
+            <div class="stat-card">
+                <div class="stat-label">Experiences</div>
+                <div class="stat-value" id="totalEntries">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Total Spent</div>
+                <div class="stat-value" id="totalCost">$0</div>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <h2>📝 Add New Experience</h2>
+            <form id="travelForm">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="date">Date</label>
+                        <input type="date" id="date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="location">Location</label>
+                        <input type="text" id="location" placeholder="e.g., Paris, France" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="activity">Activity/Experience</label>
+                        <input type="text" id="activity" placeholder="e.g., Eiffel Tower Visit" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cost">Cost ($)</label>
+                        <input type="number" id="cost" placeholder="0.00" step="0.01" min="0" required>
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="description">Description</label>
+                        <textarea id="description" placeholder="Share your experience, memories, or any notes..."></textarea>
+                    </div>
+                </div>
+                <button type="submit" class="btn-primary">Add to Registry</button>
+            </form>
+        </div>
+
+        <div class="entries-section">
+            <h2>🌍 Your Travel Experiences</h2>
+            <div class="entries-list" id="entriesList"></div>
+        </div>
+    </div>
+
+    <script>
+        // Dark mode detection
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark');
+        }
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+            if (event.matches) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        });
+
+        // Travel Registry App
+        class TravelRegistry {
+            constructor() {
+                this.entries = this.loadEntries();
+                this.form = document.getElementById('travelForm');
+                this.entriesList = document.getElementById('entriesList');
+                this.init();
+            }
+
+            init() {
+                this.form.addEventListener('submit', (e) => this.handleSubmit(e));
+                this.setTodayDate();
+                this.render();
+            }
+
+            setTodayDate() {
+                const today = new Date().toISOString().split('T')[0];
+                document.getElementById('date').value = today;
+            }
+
+            handleSubmit(e) {
+                e.preventDefault();
+
+                const entry = {
+                    id: Date.now(),
+                    date: document.getElementById('date').value,
+                    location: document.getElementById('location').value,
+                    activity: document.getElementById('activity').value,
+                    cost: parseFloat(document.getElementById('cost').value),
+                    description: document.getElementById('description').value
+                };
+
+                this.entries.unshift(entry);
+                this.saveEntries();
+                this.form.reset();
+                this.setTodayDate();
+                this.render();
+            }
+
+            deleteEntry(id) {
+                this.entries = this.entries.filter(entry => entry.id !== id);
+                this.saveEntries();
+                this.render();
+            }
+
+            formatDate(dateString) {
+                const options = { year: 'numeric', month: 'long', day: 'numeric' };
+                return new Date(dateString).toLocaleDateString('en-US', options);
+            }
+
+            formatCost(cost) {
+                return new Intl.NumberFormat('en-US', {
+                    style: 'currency',
+                    currency: 'USD'
+                }).format(cost);
+            }
+
+            calculateTotalCost() {
+                return this.entries.reduce((sum, entry) => sum + entry.cost, 0);
+            }
+
+            loadEntries() {
+                // In-memory storage for iframe environment
+                return [];
+            }
+
+            saveEntries() {
+                // In-memory storage - entries persist during session
+                // Data will be retained as long as the page isn't refreshed
+            }
+
+            render() {
+                // Update stats
+                document.getElementById('totalEntries').textContent = this.entries.length;
+                document.getElementById('totalCost').textContent = this.formatCost(this.calculateTotalCost());
+
+                // Render entries
+                if (this.entries.length === 0) {
+                    this.entriesList.innerHTML = `
+                        <div class="empty-state">
+                            <div class="empty-state-icon">🗺️</div>
+                            <div class="empty-state-text">No experiences yet. Start documenting your journey!</div>
+                        </div>
+                    `;
+                    return;
+                }
+
+                this.entriesList.innerHTML = this.entries.map((entry, index) => `
+                    <div class="entry-card" style="animation-delay: ${index * 0.1}s">
+                        <div class="entry-header">
+                            <div>
+                                <div class="entry-title">${this.escapeHtml(entry.activity)}</div>
+                            </div>
+                        </div>
+                        <div class="entry-meta">
+                            <div class="meta-item">
+                                <span class="meta-icon">📅</span>
+                                <span>${this.formatDate(entry.date)}</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-icon">📍</span>
+                                <span>${this.escapeHtml(entry.location)}</span>
+                            </div>
+                        </div>
+                        ${entry.description ? `<div class="entry-description">${this.escapeHtml(entry.description)}</div>` : ''}
+                        <div class="entry-footer">
+                            <div class="entry-cost">${this.formatCost(entry.cost)}</div>
+                            <button class="btn-delete" onclick="registry.deleteEntry(${entry.id})">Delete</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            escapeHtml(text) {
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+        }
+
+        // Initialize the app
+        const registry = new TravelRegistry();
+    </script>
+</body>
+</html>
+
