@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson Plan Templates</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #fdfbf7;
+            --bg-secondary: #f4f0e8;
+            --bg-tertiary: #ffffff;
+            --text-primary: #2c2416;
+            --text-secondary: #5a4f3f;
+            --text-muted: #8a7f6f;
+            --accent-primary: #8b6f47;
+            --accent-secondary: #a68b5b;
+            --accent-tertiary: #d4b896;
+            --border-color: #e0d5c7;
+            --success: #6b8e5f;
+            --shadow: rgba(44, 36, 22, 0.08);
+        }
+
+        .dark {
+            --bg-primary: #1a1612;
+            --bg-secondary: #242019;
+            --bg-tertiary: #2d2821;
+            --text-primary: #f4ede3;
+            --text-secondary: #d4c9bb;
+            --text-muted: #a89f91;
+            --accent-primary: #c9a875;
+            --accent-secondary: #b39568;
+            --accent-tertiary: #8b7558;
+            --border-color: #3d362d;
+            --success: #8fae7f;
+            --shadow: rgba(0, 0, 0, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        h1 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent-primary);
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .template-toggle {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: center;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .toggle-btn {
+            padding: 0.75rem 1.75rem;
+            border: 2px solid var(--border-color);
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .toggle-btn:hover {
+            border-color: var(--accent-secondary);
+            background: var(--bg-secondary);
+        }
+
+        .toggle-btn.active {
+            background: var(--accent-primary);
+            color: var(--bg-primary);
+            border-color: var(--accent-primary);
+        }
+
+        .form-section {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 8px var(--shadow);
+        }
+
+        .form-section h2 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--accent-primary);
+            margin-bottom: 1.25rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        input[type="number"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 16px;
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            transition: all 0.2s ease;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 3px rgba(139, 111, 71, 0.1);
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .objective-item,
+        .activity-item {
+            background: var(--bg-secondary);
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 0.75rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .objective-item input,
+        .activity-item input,
+        .activity-item textarea {
+            background: var(--bg-tertiary);
+            margin-bottom: 0.5rem;
+        }
+
+        .add-btn,
+        .remove-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .add-btn {
+            background: var(--accent-secondary);
+            color: var(--bg-primary);
+            margin-top: 0.5rem;
+        }
+
+        .add-btn:hover {
+            background: var(--accent-primary);
+        }
+
+        .remove-btn {
+            background: transparent;
+            color: var(--text-muted);
+            border: 1px solid var(--border-color);
+            float: right;
+            font-size: 0.85rem;
+            padding: 0.35rem 0.75rem;
+        }
+
+        .remove-btn:hover {
+            background: #dc3545;
+            color: white;
+            border-color: #dc3545;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .btn-primary {
+            background: var(--accent-primary);
+            color: var(--bg-primary);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-secondary);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+
+        .btn-secondary {
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+            border: 2px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-secondary);
+            border-color: var(--accent-tertiary);
+        }
+
+        .auto-save-indicator {
+            text-align: center;
+            color: var(--success);
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            min-height: 1.5rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .auto-save-indicator.show {
+            opacity: 1;
+        }
+
+        @media print {
+            body {
+                background: white;
+                color: black;
+            }
+
+            .template-toggle,
+            .action-buttons,
+            .auto-save-indicator {
+                display: none !important;
+            }
+
+            .form-section {
+                break-inside: avoid;
+                box-shadow: none;
+                border: 1px solid #ddd;
+            }
+
+            .add-btn,
+            .remove-btn {
+                display: none !important;
+            }
+
+            input,
+            textarea,
+            select {
+                border: none;
+                background: none;
+                color: black;
+                padding: 0.25rem 0;
+            }
+        }
+
+        @media (max-width: 640px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .form-section {
+                padding: 1.5rem;
+            }
+
+            .container {
+                padding: 1.5rem 1rem;
+            }
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-tertiary);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-secondary);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Lesson Plan Templates</h1>
+            <p class="subtitle">Professional planning tools for educators</p>
+        </header>
+
+        <div class="template-toggle">
+            <button class="toggle-btn active" data-template="highschool">High School</button>
+            <button class="toggle-btn" data-template="university">University</button>
+        </div>
+
+        <form id="lessonPlanForm">
+            <!-- Basic Information -->
+            <div class="form-section">
+                <h2>Basic Information</h2>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="instructor">Instructor Name</label>
+                        <input type="text" id="instructor" name="instructor">
+                    </div>
+                    <div class="form-group">
+                        <label for="date">Date</label>
+                        <input type="date" id="date" name="date">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="subject" class="hs-only">Subject/Course</label>
+                        <label for="subject" class="uni-only" style="display: none;">Course Code & Title</label>
+                        <input type="text" id="subject" name="subject">
+                    </div>
+                    <div class="form-group">
+                        <label for="gradeLevel" class="hs-only">Grade Level</label>
+                        <label for="gradeLevel" class="uni-only" style="display: none;">Course Level</label>
+                        <input type="text" id="gradeLevel" name="gradeLevel">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="lessonTitle">Lesson Title/Topic</label>
+                        <input type="text" id="lessonTitle" name="lessonTitle">
+                    </div>
+                    <div class="form-group">
+                        <label for="duration">Duration</label>
+                        <input type="text" id="duration" name="duration" placeholder="e.g., 50 minutes">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Standards/Curriculum Alignment (High School) -->
+            <div class="form-section hs-only">
+                <h2>Standards & Curriculum Alignment</h2>
+                <div class="form-group">
+                    <label for="standards">Relevant Standards (e.g., Common Core, State Standards)</label>
+                    <textarea id="standards" name="standards"></textarea>
+                </div>
+            </div>
+
+            <!-- Course Context (University) -->
+            <div class="form-section uni-only" style="display: none;">
+                <h2>Course Context</h2>
+                <div class="form-group">
+                    <label for="courseContext">How this lesson fits in the course sequence</label>
+                    <textarea id="courseContext" name="courseContext"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="prerequisites">Prerequisites/Prior Knowledge</label>
+                    <textarea id="prerequisites" name="prerequisites"></textarea>
+                </div>
+            </div>
+
+            <!-- Learning Objectives -->
+            <div class="form-section">
+                <h2>Learning Objectives</h2>
+                <p style="color: var(--text-muted); margin-bottom: 1rem; font-size: 0.9rem;">
+                    What students will be able to do by the end of the lesson
+                </p>
+                <div id="objectivesContainer"></div>
+                <button type="button" class="add-btn" onclick="addObjective()">+ Add Objective</button>
+            </div>
+
+            <!-- Materials & Resources -->
+            <div class="form-section">
+                <h2>Materials & Resources</h2>
+                <div class="form-group">
+                    <label for="materials">Required Materials, Technology, and Resources</label>
+                    <textarea id="materials" name="materials"></textarea>
+                </div>
+            </div>
+
+            <!-- Instructional Procedures -->
+            <div class="form-section">
+                <h2>Instructional Procedures</h2>
+                <div id="activitiesContainer"></div>
+                <button type="button" class="add-btn" onclick="addActivity()">+ Add Activity</button>
+            </div>
+
+            <!-- Assessment -->
+            <div class="form-section">
+                <h2>Assessment</h2>
+                <div class="form-group">
+                    <label for="formativeAssessment">Formative Assessment (During Lesson)</label>
+                    <textarea id="formativeAssessment" name="formativeAssessment"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="summativeAssessment">Summative Assessment (End of Lesson/Unit)</label>
+                    <textarea id="summativeAssessment" name="summativeAssessment"></textarea>
+                </div>
+            </div>
+
+            <!-- Differentiation -->
+            <div class="form-section">
+                <h2>Differentiation & Accommodation</h2>
+                <div class="form-group">
+                    <label for="differentiation" class="hs-only">Strategies for diverse learners, ELL, IEP accommodations</label>
+                    <label for="differentiation" class="uni-only" style="display: none;">Support for diverse learning needs and accessibility</label>
+                    <textarea id="differentiation" name="differentiation"></textarea>
+                </div>
+            </div>
+
+            <!-- Homework/Follow-up -->
+            <div class="form-section">
+                <h2 class="hs-only">Homework & Follow-up</h2>
+                <h2 class="uni-only" style="display: none;">Independent Work & Next Steps</h2>
+                <div class="form-group">
+                    <label for="homework" class="hs-only">Homework Assignment</label>
+                    <label for="homework" class="uni-only" style="display: none;">Readings, Assignments, or Preparation for Next Class</label>
+                    <textarea id="homework" name="homework"></textarea>
+                </div>
+            </div>
+
+            <!-- Reflection -->
+            <div class="form-section">
+                <h2>Teacher Reflection</h2>
+                <div class="form-group">
+                    <label for="reflection">Notes for improvement, what worked well, challenges encountered</label>
+                    <textarea id="reflection" name="reflection"></textarea>
+                </div>
+            </div>
+        </form>
+
+        <div class="action-buttons">
+            <button class="btn btn-secondary" onclick="clearForm()">Clear All</button>
+            <button class="btn btn-primary" onclick="exportPDF()">Export as PDF</button>
+            <button class="btn btn-primary" onclick="window.print()">Print</button>
+        </div>
+
+        <div class="auto-save-indicator" id="autoSaveIndicator">
+            ✓ Auto-saved
+        </div>
+    </div>
+
+    <script>
+        // Detect dark mode preference
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark');
+        }
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+            if (event.matches) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        });
+
+        let currentTemplate = 'highschool';
+        let objectiveCount = 0;
+        let activityCount = 0;
+
+        // Template toggle
+        document.querySelectorAll('.toggle-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                currentTemplate = this.dataset.template;
+                switchTemplate(currentTemplate);
+            });
+        });
+
+        function switchTemplate(template) {
+            if (template === 'university') {
+                document.querySelectorAll('.hs-only').forEach(el => el.style.display = 'none');
+                document.querySelectorAll('.uni-only').forEach(el => el.style.display = 'block');
+            } else {
+                document.querySelectorAll('.hs-only').forEach(el => el.style.display = 'block');
+                document.querySelectorAll('.uni-only').forEach(el => el.style.display = 'none');
+            }
+            loadFromStorage();
+        }
+
+        function addObjective() {
+            objectiveCount++;
+            const container = document.getElementById('objectivesContainer');
+            const div = document.createElement('div');
+            div.className = 'objective-item';
+            div.innerHTML = `
+                <button type="button" class="remove-btn" onclick="this.parentElement.remove(); autoSave();">Remove</button>
+                <input type="text" name="objective_${objectiveCount}" placeholder="Learning objective..." onchange="autoSave()">
+            `;
+            container.appendChild(div);
+            autoSave();
+        }
+
+        function addActivity() {
+            activityCount++;
+            const container = document.getElementById('activitiesContainer');
+            const div = document.createElement('div');
+            div.className = 'activity-item';
+            div.innerHTML = `
+                <button type="button" class="remove-btn" onclick="this.parentElement.remove(); autoSave();">Remove</button>
+                <label>Activity Name</label>
+                <input type="text" name="activity_name_${activityCount}" placeholder="e.g., Introduction, Group Work, Discussion..." onchange="autoSave()">
+                <label>Duration</label>
+                <input type="text" name="activity_duration_${activityCount}" placeholder="e.g., 10 minutes" onchange="autoSave()">
+                <label>Description & Procedure</label>
+                <textarea name="activity_description_${activityCount}" placeholder="Detailed steps and instructions..." onchange="autoSave()"></textarea>
+            `;
+            container.appendChild(div);
+            autoSave();
+        }
+
+        // In-memory storage (since localStorage isn't available in iframe)
+        const savedData = {
+            highschool: null,
+            university: null
+        };
+
+        // Auto-save functionality
+        let autoSaveTimeout;
+        function autoSave() {
+            clearTimeout(autoSaveTimeout);
+            autoSaveTimeout = setTimeout(() => {
+                const formData = new FormData(document.getElementById('lessonPlanForm'));
+                const data = {
+                    template: currentTemplate,
+                    fields: Object.fromEntries(formData),
+                    objectives: [],
+                    activities: []
+                };
+
+                // Save objectives
+                document.querySelectorAll('.objective-item input').forEach(input => {
+                    data.objectives.push(input.value);
+                });
+
+                // Save activities
+                document.querySelectorAll('.activity-item').forEach(item => {
+                    const inputs = item.querySelectorAll('input, textarea');
+                    data.activities.push({
+                        name: inputs[0].value,
+                        duration: inputs[1].value,
+                        description: inputs[2].value
+                    });
+                });
+
+                savedData[currentTemplate] = data;
+
+                showAutoSaveIndicator();
+            }, 1000);
+        }
+
+        function showAutoSaveIndicator() {
+            const indicator = document.getElementById('autoSaveIndicator');
+            indicator.classList.add('show');
+            setTimeout(() => {
+                indicator.classList.remove('show');
+            }, 2000);
+        }
+
+        // Load from storage
+        function loadFromStorage() {
+            const saved = savedData[currentTemplate];
+            if (saved) {
+                const data = saved;
+
+                // Load form fields
+                Object.entries(data.fields).forEach(([name, value]) => {
+                    const field = document.querySelector(`[name="${name}"]`);
+                    if (field) field.value = value;
+                });
+
+                // Load objectives
+                document.getElementById('objectivesContainer').innerHTML = '';
+                objectiveCount = 0;
+                data.objectives.forEach(obj => {
+                    addObjective();
+                    const inputs = document.querySelectorAll('.objective-item input');
+                    inputs[inputs.length - 1].value = obj;
+                });
+
+                // Load activities
+                document.getElementById('activitiesContainer').innerHTML = '';
+                activityCount = 0;
+                data.activities.forEach(act => {
+                    addActivity();
+                    const items = document.querySelectorAll('.activity-item');
+                    const lastItem = items[items.length - 1];
+                    const inputs = lastItem.querySelectorAll('input, textarea');
+                    inputs[0].value = act.name;
+                    inputs[1].value = act.duration;
+                    inputs[2].value = act.description;
+                });
+            } else {
+                // Initialize with default items
+                document.getElementById('objectivesContainer').innerHTML = '';
+                document.getElementById('activitiesContainer').innerHTML = '';
+                objectiveCount = 0;
+                activityCount = 0;
+                addObjective();
+                addActivity();
+            }
+        }
+
+        function clearForm() {
+            // Create custom confirmation dialog
+            const modal = document.createElement('div');
+            modal.className = 'fixed';
+            modal.style.cssText = 'position: fixed; inset: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 1000;';
+            modal.innerHTML = `
+                <div style="background: var(--bg-tertiary); padding: 2rem; border-radius: 12px; box-shadow: 0 8px 32px var(--shadow); max-width: 400px; margin: 1rem;">
+                    <h3 style="font-family: 'Crimson Pro', serif; color: var(--accent-primary); margin-bottom: 1rem;">Clear Lesson Plan?</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">This will clear all fields and remove the auto-saved data. This action cannot be undone.</p>
+                    <div style="display: flex; gap: 0.75rem; justify-content: flex-end;">
+                        <button class="btn btn-secondary" style="padding: 0.75rem 1.5rem;" onclick="this.closest('.fixed').remove()">Cancel</button>
+                        <button class="btn btn-primary" style="padding: 0.75rem 1.5rem; background: #dc3545;" onclick="confirmClear()">Clear All</button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+
+        function confirmClear() {
+            document.querySelector('.fixed').remove();
+            document.getElementById('lessonPlanForm').reset();
+            savedData[currentTemplate] = null;
+            loadFromStorage();
+        }
+
+        function exportPDF() {
+            window.print();
+        }
+
+        // Add auto-save listeners
+        document.getElementById('lessonPlanForm').addEventListener('change', autoSave);
+        document.getElementById('lessonPlanForm').addEventListener('input', autoSave);
+
+        // Initialize
+        loadFromStorage();
+    </script>
+</body>
+</html>
