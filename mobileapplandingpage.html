@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AppLaunch - Your App Starts Here</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #06b6d4;
+            --primary-dark: #0891b2;
+            --accent: #f97316;
+            --accent-dark: #ea580c;
+            --bg-dark: #0f172a;
+            --bg-darker: #020617;
+            --text-light: #f8fafc;
+            --text-gray: #cbd5e1;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Manrope', sans-serif;
+            background: var(--bg-darker);
+            color: var(--text-light);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Archivo', sans-serif;
+            font-weight: 700;
+        }
+
+        /* Animated gradient background */
+        .hero-bg {
+            background: linear-gradient(135deg, #020617 0%, #0f172a 50%, #1e293b 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 20% 50%, rgba(6, 182, 212, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(249, 115, 22, 0.15) 0%, transparent 50%);
+            animation: gradientShift 15s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(-50px, -50px) rotate(180deg); }
+        }
+
+        /* Geometric patterns */
+        .pattern-dots {
+            background-image: radial-gradient(circle, rgba(6, 182, 212, 0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+
+        /* Glass morphism cards */
+        .glass-card {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(6, 182, 212, 0.5);
+            box-shadow: 0 20px 40px rgba(6, 182, 212, 0.2);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease forwards;
+            opacity: 0;
+        }
+
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-500 { animation-delay: 0.5s; }
+        .delay-600 { animation-delay: 0.6s; }
+
+        /* Buttons */
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            padding: 14px 32px;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-decoration: none;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(6, 182, 212, 0.4);
+        }
+
+        .btn-accent {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+            padding: 14px 32px;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-decoration: none;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .btn-accent:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(249, 115, 22, 0.4);
+        }
+
+        /* Phone mockup */
+        .phone-mockup {
+            width: 280px;
+            height: 560px;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border-radius: 40px;
+            padding: 12px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+            position: relative;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, #0891b2 0%, #06b6d4 50%, #f97316 100%);
+            border-radius: 32px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .phone-notch {
+            width: 120px;
+            height: 25px;
+            background: #0f172a;
+            border-radius: 0 0 20px 20px;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Stats counter */
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* FAQ Accordion */
+        .faq-item {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            margin-bottom: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question {
+            padding: 20px 24px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            font-size: 18px;
+        }
+
+        .faq-question:hover {
+            background: rgba(6, 182, 212, 0.1);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            padding: 0 24px;
+            color: var(--text-gray);
+            line-height: 1.6;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 300px;
+            padding: 0 24px 20px 24px;
+        }
+
+        .faq-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+
+        /* Dark mode support */
+        @media (prefers-color-scheme: dark) {
+            html {
+                color-scheme: dark;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .stat-number {
+                font-size: 2rem;
+            }
+
+            .phone-mockup {
+                width: 220px;
+                height: 440px;
+            }
+
+            h1 {
+                font-size: 2.5rem !important;
+            }
+
+            h2 {
+                font-size: 2rem !important;
+            }
+        }
+
+        /* Scroll reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Feature icons */
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.2) 0%, rgba(249, 115, 22, 0.2) 100%);
+        }
+
+        /* Download badges */
+        .download-badge {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 12px 24px;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: white;
+        }
+
+        .download-badge:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Navigation */
+        nav {
+            backdrop-filter: blur(10px);
+            background: rgba(2, 6, 23, 0.8);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        /* Testimonial cards */
+        .testimonial-card {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 32px;
+            min-width: 350px;
+        }
+
+        .testimonial-slider {
+            display: flex;
+            gap: 24px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .testimonial-slider::-webkit-scrollbar {
+            display: none;
+        }
+
+        .testimonial-card {
+            scroll-snap-align: start;
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 768px) {
+            .testimonial-card {
+                min-width: 280px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="py-4">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center gap-2">
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                        <rect width="40" height="40" rx="12" fill="url(#logo-gradient)"/>
+                        <path d="M20 10L28 18L20 26L12 18L20 10Z" fill="white"/>
+                        <defs>
+                            <linearGradient id="logo-gradient" x1="0" y1="0" x2="40" y2="40">
+                                <stop stop-color="#06b6d4"/>
+                                <stop offset="1" stop-color="#f97316"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <span class="text-2xl font-bold">AppLaunch</span>
+                </div>
+
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="#features" class="text-gray-300 hover:text-white transition">Features</a>
+                    <a href="#screenshots" class="text-gray-300 hover:text-white transition">Screenshots</a>
+                    <a href="#testimonials" class="text-gray-300 hover:text-white transition">Testimonials</a>
+                    <a href="#pricing" class="text-gray-300 hover:text-white transition">Pricing</a>
+                    <a href="#faq" class="text-gray-300 hover:text-white transition">FAQ</a>
+                    <button class="btn-primary">Download Now</button>
+                </div>
+
+                <!-- Mobile menu button -->
+                <button id="mobile-menu-btn" class="md:hidden">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Mobile menu -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 flex flex-col gap-4">
+                <a href="#features" class="text-gray-300 hover:text-white transition">Features</a>
+                <a href="#screenshots" class="text-gray-300 hover:text-white transition">Screenshots</a>
+                <a href="#testimonials" class="text-gray-300 hover:text-white transition">Testimonials</a>
+                <a href="#pricing" class="text-gray-300 hover:text-white transition">Pricing</a>
+                <a href="#faq" class="text-gray-300 hover:text-white transition">FAQ</a>
+                <button class="btn-primary w-full">Download Now</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-bg pattern-dots relative py-20 md:py-32">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="relative z-10">
+                    <h1 class="text-5xl md:text-7xl font-black mb-6 fade-in-up">
+                        Your App Journey <span class="bg-gradient-to-r from-cyan-400 to-orange-500 bg-clip-text text-transparent">Starts Here</span>
+                    </h1>
+                    <p class="text-xl text-gray-300 mb-8 fade-in-up delay-100">
+                        Transform your daily routine with our powerful, intuitive mobile app. Available on iOS and Android.
+                    </p>
+                    <div class="flex flex-wrap gap-4 mb-8 fade-in-up delay-200">
+                        <button class="btn-primary">Get Started Free</button>
+                        <button class="btn-accent">Watch Demo</button>
+                    </div>
+                    <div class="flex flex-wrap gap-4 fade-in-up delay-300">
+                        <a href="#" class="download-badge">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 22 13.89 21.18 12.37 21.18C10.84 21.18 10.37 21.95 9.09997 22C7.78997 22.05 6.79997 20.68 5.95997 19.47C4.24997 17 2.93997 12.45 4.69997 9.39C5.56997 7.87 7.12997 6.91 8.81997 6.88C10.1 6.86 11.32 7.75 12.11 7.75C12.89 7.75 14.37 6.68 15.92 6.84C16.57 6.87 18.39 7.1 19.56 8.82C19.47 8.88 17.39 10.1 17.41 12.63C17.44 15.65 20.06 16.66 20.09 16.67C20.06 16.74 19.67 18.11 18.71 19.5ZM13 3.5C13.73 2.67 14.94 2.04 15.94 2C16.07 3.17 15.6 4.35 14.9 5.19C14.21 6.04 13.07 6.7 11.95 6.61C11.8 5.46 12.36 4.26 13 3.5Z"/>
+                            </svg>
+                            <div class="text-left">
+                                <div class="text-xs text-gray-400">Download on</div>
+                                <div class="font-semibold">App Store</div>
+                            </div>
+                        </a>
+                        <a href="#" class="download-badge">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M3.609 1.814L13.792 12L3.61 22.186C3.218 21.861 3 21.36 3 20.769V3.231C3 2.64 3.218 2.139 3.609 1.814ZM13.792 12L3.609 1.814C3.783 1.638 4.011 1.519 4.268 1.485L16.875 8.657L13.792 12ZM13.792 12L16.875 15.343L4.268 22.515C4.011 22.481 3.783 22.362 3.609 22.186L13.792 12ZM20.518 10.588L17.705 12L20.518 13.412C21.147 13.755 21.147 14.245 20.518 14.588L17.705 16L13.792 12L17.705 8L20.518 9.412C21.147 9.755 21.147 10.245 20.518 10.588Z"/>
+                            </svg>
+                            <div class="text-left">
+                                <div class="text-xs text-gray-400">Get it on</div>
+                                <div class="font-semibold">Google Play</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="flex justify-center fade-in-up delay-400">
+                    <div class="phone-mockup">
+                        <div class="phone-screen">
+                            <div class="phone-notch"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-16 bg-gradient-to-b from-slate-950 to-slate-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div class="reveal">
+                    <div class="stat-number" data-target="5000000">0</div>
+                    <div class="text-gray-400 mt-2">Downloads</div>
+                </div>
+                <div class="reveal">
+                    <div class="stat-number" data-target="4.8">0</div>
+                    <div class="text-gray-400 mt-2">App Rating</div>
+                </div>
+                <div class="reveal">
+                    <div class="stat-number" data-target="150">0</div>
+                    <div class="text-gray-400 mt-2">Countries</div>
+                </div>
+                <div class="reveal">
+                    <div class="stat-number" data-target="99">0</div>
+                    <div class="text-gray-400 mt-2">Uptime %</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-slate-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">Powerful Features</h2>
+                <p class="text-xl text-gray-400 max-w-2xl mx-auto">Everything you need to boost your productivity and streamline your workflow</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="glass-card p-8 reveal">
+                    <div class="feature-icon">⚡</div>
+                    <h3 class="text-2xl font-bold mb-3">Lightning Fast</h3>
+                    <p class="text-gray-400 leading-relaxed">Optimized performance ensures your tasks are completed in milliseconds, not seconds.</p>
+                </div>
+
+                <div class="glass-card p-8 reveal">
+                    <div class="feature-icon">🔒</div>
+                    <h3 class="text-2xl font-bold mb-3">Secure & Private</h3>
+                    <p class="text-gray-400 leading-relaxed">End-to-end encryption keeps your data safe and protected at all times.</p>
+                </div>
+
+                <div class="glass-card p-8 reveal">
+                    <div class="feature-icon">🌐</div>
+                    <h3 class="text-2xl font-bold mb-3">Cross-Platform</h3>
+                    <p class="text-gray-400 leading-relaxed">Seamlessly sync across all your devices - phone, tablet, and desktop.</p>
+                </div>
+
+                <div class="glass-card p-8 reveal">
+                    <div class="feature-icon">🎨</div>
+                    <h3 class="text-2xl font-bold mb-3">Beautiful Design</h3>
+                    <p class="text-gray-400 leading-relaxed">Stunning interface that's both intuitive and delightful to use every day.</p>
+                </div>
+
+                <div class="glass-card p-8 reveal">
+                    <div class="feature-icon">📊</div>
+                    <h3 class="text-2xl font-bold mb-3">Smart Analytics</h3>
+                    <p class="text-gray-400 leading-relaxed">Get insights into your habits and patterns with intelligent data visualization.</p>
+                </div>
+
+                <div class="glass-card p-8 reveal">
+                    <div class="feature-icon">🤝</div>
+                    <h3 class="text-2xl font-bold mb-3">Team Collaboration</h3>
+                    <p class="text-gray-400 leading-relaxed">Work together in real-time with your team, wherever they are.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screenshots Section -->
+    <section id="screenshots" class="py-20 bg-gradient-to-b from-slate-900 to-slate-950">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">See It In Action</h2>
+                <p class="text-xl text-gray-400">Experience the interface that users love</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="reveal">
+                    <div class="phone-mockup mx-auto" style="width: 240px; height: 480px; animation-delay: 0s;">
+                        <div class="phone-screen" style="background: linear-gradient(180deg, #0891b2 0%, #06b6d4 100%);">
+                            <div class="phone-notch"></div>
+                            <div class="p-6 pt-12">
+                                <div class="bg-white bg-opacity-20 rounded-lg p-4 mb-4">
+                                    <div class="h-3 bg-white bg-opacity-40 rounded mb-2"></div>
+                                    <div class="h-3 bg-white bg-opacity-40 rounded w-2/3"></div>
+                                </div>
+                                <div class="bg-white bg-opacity-20 rounded-lg p-4 mb-4">
+                                    <div class="h-3 bg-white bg-opacity-40 rounded mb-2"></div>
+                                    <div class="h-3 bg-white bg-opacity-40 rounded w-3/4"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-center mt-4 text-gray-400">Dashboard View</p>
+                </div>
+
+                <div class="reveal">
+                    <div class="phone-mockup mx-auto" style="width: 240px; height: 480px; animation-delay: 0.2s;">
+                        <div class="phone-screen" style="background: linear-gradient(180deg, #7c3aed 0%, #a855f7 100%);">
+                            <div class="phone-notch"></div>
+                            <div class="p-6 pt-12">
+                                <div class="bg-white bg-opacity-20 rounded-full h-32 w-32 mx-auto mb-4"></div>
+                                <div class="bg-white bg-opacity-20 rounded-lg p-4">
+                                    <div class="h-3 bg-white bg-opacity-40 rounded mb-2"></div>
+                                    <div class="h-3 bg-white bg-opacity-40 rounded mb-2"></div>
+                                    <div class="h-3 bg-white bg-opacity-40 rounded w-1/2"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-center mt-4 text-gray-400">Profile Settings</p>
+                </div>
+
+                <div class="reveal">
+                    <div class="phone-mockup mx-auto" style="width: 240px; height: 480px; animation-delay: 0.4s;">
+                        <div class="phone-screen" style="background: linear-gradient(180deg, #ec4899 0%, #f97316 100%);">
+                            <div class="phone-notch"></div>
+                            <div class="p-6 pt-12">
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div class="bg-white bg-opacity-20 rounded-lg h-24"></div>
+                                    <div class="bg-white bg-opacity-20 rounded-lg h-24"></div>
+                                    <div class="bg-white bg-opacity-20 rounded-lg h-24"></div>
+                                    <div class="bg-white bg-opacity-20 rounded-lg h-24"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-center mt-4 text-gray-400">Analytics</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-20 bg-slate-950">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">Loved by Users</h2>
+                <p class="text-xl text-gray-400">See what our community has to say</p>
+            </div>
+
+            <div class="testimonial-slider px-4">
+                <div class="testimonial-card">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-cyan-400 to-blue-500 mr-4"></div>
+                        <div>
+                            <div class="font-bold">Sarah Johnson</div>
+                            <div class="text-gray-400 text-sm">Product Manager</div>
+                        </div>
+                    </div>
+                    <div class="text-yellow-400 mb-3">★★★★★</div>
+                    <p class="text-gray-300 leading-relaxed">"This app has completely transformed how I manage my daily tasks. The interface is beautiful and incredibly intuitive!"</p>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-purple-400 to-pink-500 mr-4"></div>
+                        <div>
+                            <div class="font-bold">Michael Chen</div>
+                            <div class="text-gray-400 text-sm">Software Engineer</div>
+                        </div>
+                    </div>
+                    <div class="text-yellow-400 mb-3">★★★★★</div>
+                    <p class="text-gray-300 leading-relaxed">"The performance is outstanding. I've tried many similar apps, but this one is by far the fastest and most reliable."</p>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-orange-400 to-red-500 mr-4"></div>
+                        <div>
+                            <div class="font-bold">Emily Rodriguez</div>
+                            <div class="text-gray-400 text-sm">Freelance Designer</div>
+                        </div>
+                    </div>
+                    <div class="text-yellow-400 mb-3">★★★★★</div>
+                    <p class="text-gray-300 leading-relaxed">"I love how seamlessly it syncs across all my devices. The team collaboration features are a game-changer!"</p>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-green-400 to-teal-500 mr-4"></div>
+                        <div>
+                            <div class="font-bold">David Kim</div>
+                            <div class="text-gray-400 text-sm">Entrepreneur</div>
+                        </div>
+                    </div>
+                    <div class="text-yellow-400 mb-3">★★★★★</div>
+                    <p class="text-gray-300 leading-relaxed">"Best productivity app I've ever used. The analytics feature helps me understand my patterns and improve efficiency."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-20 bg-gradient-to-b from-slate-950 to-slate-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">Simple Pricing</h2>
+                <p class="text-xl text-gray-400">Choose the plan that works for you</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <div class="glass-card p-8 reveal">
+                    <h3 class="text-2xl font-bold mb-2">Free</h3>
+                    <div class="text-4xl font-bold mb-6">$0<span class="text-lg text-gray-400">/month</span></div>
+                    <ul class="space-y-3 mb-8 text-gray-300">
+                        <li class="flex items-start">
+                            <span class="text-cyan-400 mr-2">✓</span>
+                            <span>Up to 10 projects</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-cyan-400 mr-2">✓</span>
+                            <span>Basic analytics</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-cyan-400 mr-2">✓</span>
+                            <span>Mobile & desktop apps</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-gray-600 mr-2">✗</span>
+                            <span class="text-gray-500">Team collaboration</span>
+                        </li>
+                    </ul>
+                    <button class="w-full btn-primary bg-opacity-20 hover:bg-opacity-30">Get Started</button>
+                </div>
+
+                <div class="glass-card p-8 border-2 border-cyan-400 reveal" style="transform: scale(1.05);">
+                    <div class="bg-gradient-to-r from-cyan-400 to-orange-500 text-white text-sm font-bold py-1 px-3 rounded-full inline-block mb-4">POPULAR</div>
+                    <h3 class="text-2xl font-bold mb-2">Pro</h3>
+                    <div class="text-4xl font-bold mb-6">$12<span class="text-lg text-gray-400">/month</span></div>
+                    <ul class="space-y-3 mb-8 text-gray-300">
+                        <li class="flex items-start">
+                            <span class="text-cyan-400 mr-2">✓</span>
+                            <span>Unlimited projects</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-cyan-400 mr-2">✓</span>
+                            <span>Advanced analytics</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-cyan-400 mr-2">✓</span>
+                            <span>Priority support</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-cyan-400 mr-2">✓</span>
+                            <span>Team collaboration (5 users)</span>
+                        </li>
+                    </ul>
+                    <button class="w-full btn-primary">Get Started</button>
+                </div>
+
+                <div class="glass-card p-8 reveal">
+                    <h3 class="text-2xl font-bold mb-2">Enterprise</h3>
+                    <div class="text-4xl font-bold mb-6">$49<span class="text-lg text-gray-400">/month</span></div>
+                    <ul class="space-y-3 mb-8 text-gray-300">
+                        <li class="flex items-start">
+                            <span class="text-cyan-400 mr-2">✓</span>
+                            <span>Everything in Pro</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-cyan-400 mr-2">✓</span>
+                            <span>Unlimited team members</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-cyan-400 mr-2">✓</span>
+                            <span>Custom integrations</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-cyan-400 mr-2">✓</span>
+                            <span>Dedicated support</span>
+                        </li>
+                    </ul>
+                    <button class="w-full btn-accent">Contact Sales</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-20 bg-slate-900">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">Frequently Asked Questions</h2>
+                <p class="text-xl text-gray-400">Everything you need to know</p>
+            </div>
+
+            <div class="reveal">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Is there a free trial available?</span>
+                        <svg class="faq-icon" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </div>
+                    <div class="faq-answer">
+                        Yes! You can try our Pro plan free for 14 days with no credit card required. Just download the app and start exploring all premium features.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Can I cancel my subscription anytime?</span>
+                        <svg class="faq-icon" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </div>
+                    <div class="faq-answer">
+                        Absolutely! You can cancel your subscription at any time from the app settings. No questions asked, and you'll retain access until the end of your billing period.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Does it work offline?</span>
+                        <svg class="faq-icon" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </div>
+                    <div class="faq-answer">
+                        Yes! The app works perfectly offline. All your data is stored locally and will automatically sync when you're back online.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Is my data secure?</span>
+                        <svg class="faq-icon" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </div>
+                    <div class="faq-answer">
+                        Your data security is our top priority. We use end-to-end encryption, and all data is stored securely using industry-standard protocols. We never sell your data to third parties.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How do I contact support?</span>
+                        <svg class="faq-icon" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </div>
+                    <div class="faq-answer">
+                        You can reach our support team 24/7 through the in-app chat, email us at support@applaunch.com, or visit our help center for instant answers.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-gradient-to-br from-cyan-600 via-blue-600 to-orange-500 relative overflow-hidden">
+        <div class="absolute inset-0 bg-black opacity-20"></div>
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6 reveal">Ready to Get Started?</h2>
+            <p class="text-xl mb-8 opacity-90 reveal">Join millions of users who have already transformed their workflow</p>
+            <div class="flex flex-wrap justify-center gap-4 reveal">
+                <button class="bg-white text-gray-900 px-8 py-4 rounded-xl font-bold text-lg hover:bg-gray-100 transition transform hover:scale-105">
+                    Download for Free
+                </button>
+                <button class="bg-transparent border-2 border-white text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-white hover:text-gray-900 transition">
+                    View Pricing
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 py-12 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <svg width="32" height="32" viewBox="0 0 40 40" fill="none">
+                            <rect width="40" height="40" rx="12" fill="url(#footer-logo-gradient)"/>
+                            <path d="M20 10L28 18L20 26L12 18L20 10Z" fill="white"/>
+                            <defs>
+                                <linearGradient id="footer-logo-gradient" x1="0" y1="0" x2="40" y2="40">
+                                    <stop stop-color="#06b6d4"/>
+                                    <stop offset="1" stop-color="#f97316"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                        <span class="text-xl font-bold">AppLaunch</span>
+                    </div>
+                    <p class="text-gray-400 text-sm">Transforming the way you work, one tap at a time.</p>
+                </div>
+
+                <div>
+                    <h4 class="font-bold mb-4">Product</h4>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li><a href="#" class="hover:text-white transition">Features</a></li>
+                        <li><a href="#" class="hover:text-white transition">Pricing</a></li>
+                        <li><a href="#" class="hover:text-white transition">Updates</a></li>
+                        <li><a href="#" class="hover:text-white transition">Beta Program</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold mb-4">Company</h4>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li><a href="#" class="hover:text-white transition">About Us</a></li>
+                        <li><a href="#" class="hover:text-white transition">Blog</a></li>
+                        <li><a href="#" class="hover:text-white transition">Careers</a></li>
+                        <li><a href="#" class="hover:text-white transition">Press Kit</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold mb-4">Legal</h4>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li><a href="#" class="hover:text-white transition">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-white transition">Terms of Service</a></li>
+                        <li><a href="#" class="hover:text-white transition">Cookie Policy</a></li>
+                        <li><a href="#" class="hover:text-white transition">Licenses</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm mb-4 md:mb-0">© 2024 AppLaunch. All rights reserved.</p>
+                <div class="flex gap-6">
+                    <a href="#" class="text-gray-400 hover:text-white transition">
+                        <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">
+                        <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">
+                        <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm4.441 16.892c-2.102.144-6.784.144-8.883 0C5.282 16.736 5.017 15.622 5 12c.017-3.629.285-4.736 2.558-4.892 2.099-.144 6.782-.144 8.883 0C18.718 7.264 18.982 8.378 19 12c-.018 3.629-.285 4.736-2.559 4.892zM10 9.658l4.917 2.338L10 14.342V9.658z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Dark mode support
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark');
+        }
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+            if (event.matches) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // FAQ Accordion
+        const faqItems = document.querySelectorAll('.faq-item');
+
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+
+            question.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+
+                // Close all items
+                faqItems.forEach(i => i.classList.remove('active'));
+
+                // Open clicked item if it wasn't active
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        // Scroll reveal animation
+        const revealElements = document.querySelectorAll('.reveal');
+
+        const revealOnScroll = () => {
+            const windowHeight = window.innerHeight;
+
+            revealElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const revealPoint = 100;
+
+                if (elementTop < windowHeight - revealPoint) {
+                    element.classList.add('active');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll(); // Initial check
+
+        // Animated counter for stats
+        const animateCounter = (element, target, suffix = '') => {
+            const duration = 2000; // 2 seconds
+            const increment = target / (duration / 16); // 60 FPS
+            let current = 0;
+
+            const updateCounter = () => {
+                current += increment;
+                if (current < target) {
+                    if (suffix === '.') {
+                        element.textContent = current.toFixed(1);
+                    } else {
+                        element.textContent = Math.floor(current).toLocaleString();
+                    }
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    if (suffix === '.') {
+                        element.textContent = target.toFixed(1);
+                    } else {
+                        element.textContent = target.toLocaleString();
+                    }
+                }
+            };
+
+            updateCounter();
+        };
+
+        // Trigger counter animation when stats section is visible
+        let statsAnimated = false;
+        const statsSection = document.querySelectorAll('.stat-number');
+
+        const animateStats = () => {
+            if (statsAnimated) return;
+
+            const firstStat = statsSection[0];
+            const rect = firstStat.getBoundingClientRect();
+
+            if (rect.top < window.innerHeight - 100) {
+                statsAnimated = true;
+                statsSection.forEach(stat => {
+                    const target = parseInt(stat.dataset.target);
+                    const suffix = stat.dataset.target.includes('.') ? '.' : '';
+                    animateCounter(stat, parseFloat(stat.dataset.target), suffix);
+                });
+            }
+        };
+
+        window.addEventListener('scroll', animateStats);
+        animateStats(); // Initial check
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && href.length > 1) {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+
+                        // Close mobile menu if open
+                        mobileMenu.classList.add('hidden');
+                    }
+                }
+            });
+        });
+
+        // Testimonial slider auto-scroll
+        const testimonialSlider = document.querySelector('.testimonial-slider');
+        let isScrolling;
+
+        // Optional: Add touch swipe support for better mobile experience
+        let startX = 0;
+        let scrollLeft = 0;
+
+        testimonialSlider.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].pageX - testimonialSlider.offsetLeft;
+            scrollLeft = testimonialSlider.scrollLeft;
+        });
+
+        testimonialSlider.addEventListener('touchmove', (e) => {
+            const x = e.touches[0].pageX - testimonialSlider.offsetLeft;
+            const walk = (x - startX) * 2;
+            testimonialSlider.scrollLeft = scrollLeft - walk;
+        });
+    </script>
+</body>
+</html>
+
